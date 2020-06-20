@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+</head>
+<body>
+  <div id="sensors">
+    <a href="/sensor"><button id="sensorTest">Check Soil Moisture Levels</button></a><br>
+    <span id="sensorRecent">Soil moisture levels as of:  </span>
+    <table>
+      <th>Soil Moisture Levels</th>
+        <tr>
+          <td>Sensor 1:</td>
+          <td id="sensor1">{{ text }}</td>
+        </tr>
+        <tr>
+          <td>Sensor 2:</td>
+          <td id ="sensor2">{{ sensor2 }}</td>
+        </tr>
+        <tr>
+          <td>Sensor 3:</td>
+          <td id="sensor3">{{ sensor3 }}</td>
+        </tr>
+        <tr>
+          <td>Sensor 4:</td>
+          <td id="sensor4">{{ sensor4 }}</td>
+        </tr>
+    </table>
+    <button style="visibility:hidden">Edit Sensor Names</button>
+  </div>
+  <div id="hose">
+    <button id="hoseOn">Turn On Irrigation</button>
+    <button id="hoseOff">Turn Off Irrigation</button>
+    <button id="hoseTimer">Water for 15 minutes</button>
+    <span id="hoseStatus"></span>
+    <span id="hoseRecent">Last Irrigated on: {{ watered }}</span>
+  </div>
+</body>
+</html>
