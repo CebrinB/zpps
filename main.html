@@ -3,11 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--favicon courtesy of Font Awesome, used with permission license: https://fontawesome.com/license-->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css">
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/b631726285.js" crossorigin="anonymous"></script>
   <title>{{ title }}</title>
 </head>
 <body>
+  <div id="header">
+      <!-- Logo -->
+				<div id="logo">
+					<h1>ZPPS</h1>
+					<span id="big">Zombie Plant Prevention System</span>
+				</div>
+
+  </div>
+  <div id="buttons">
+    <div id="buttonContainer">
+      <a id="sensorCheck" href="/sensor">
+        <span class="fas fa-tint">
+          <p>Check Soil Moisture Levels</p>
+        </span>
+      </a>
+      <a id="hoseOn" href="/water" style="display:none">
+        <span class="fas fa-faucet">
+          <p>Turn On Irrigation</p>
+        </span>
+      </a>
+      <a id="hoseOff" href="/stop">
+        <span class="fas fa-faucet">
+          <p>Turn Off Irrigation</p>
+        </span>
+      </a>
+      <a id="hoseTimer" href="/autowater">
+        <span class="fa fa-pagelines">
+          <p>Water for 15 Minutes</p>
+        </span>
+      </a>
+    </div><br>
+  </div>
   <div id="sensors">
-    <a href="/sensor"><button id="sensorTest">Check Soil Moisture Levels</button></a><br>
     <table>
       <th>Soil Moisture Levels as of: {{ measured }}</th>
         <tr>
@@ -30,9 +66,6 @@
     <button style="visibility:hidden">Edit Sensor Names</button>
   </div>
   <div id="hose">
-    <a href="/water"><button id="hoseOn">Turn On Irrigation</button></a>
-    <a href="/stop"><button id="hoseOff">Turn Off Irrigation</button></a>
-    <a href="/autowater"><button id="hoseTimer">Water for 15 minutes</button></a>
     <span id="hoseStatus"></span><br>
     <span id="hoseRecent"> {{ watered }} </span>
   </div>
