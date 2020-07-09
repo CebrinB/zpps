@@ -7,13 +7,32 @@ window.addEventListener("load", () => {
         document.querySelector('#hoseOff').style.display = 'none';
         document.querySelector('#hoseOn').style.display = 'block';
     }
+
+    const pencils = Array.from(document.querySelectorAll('#edit'));
+    pencils.forEach(pencil => {
+      pencil.addEventListener('touchend', e => {
+        editLabel(e.currentTarget);
+        
+      });
+    });
 });
 
-function editLabel(e) {
-    document.querySelector('').style.display = 'none'; //hide the label
-    document.querySelector('').style.display = 'block'; //show the input field
-    
-    //fill the input field with current label
-    document.querySelector('').placeholder = document.querySelector('').innerText;
+function editLabel(a) {
+  debugger;
+    a.style.display = 'none';                     //hide the edit button
+    a.nextElementSibling.style.display = 'block'; //show the save button
+
+    //hide old labels
+    const labels = Array.from(document.querySelectorAll('.label'));
+    labels.forEach(label => {
+      label.style.display = 'none';
+    });
+
+    //show input fields and fill with current label
+    const inputs = Array.from(document.querySelectorAll('input'));
+    inputs.forEach(input => {
+      input.parentElement.style.display = 'block';
+      input.value = input.parentElement.previousElementSibling.innerText; 
+    });   
 }
     

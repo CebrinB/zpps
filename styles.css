@@ -12,7 +12,8 @@ body {
 }
 
 body > div + div {
-  margin: 8px;
+  margin: 15px;
+  text-align: center;
 }
 
 #header {
@@ -38,6 +39,12 @@ body > div + div {
     justify-content: space-evenly;
   }
   
+  .bigbuttons {
+    font-size: 12px;
+    font-weight: 400;
+    padding: 8px;
+  }
+
   .fa, .fas {
     border-radius: 50%;
     border: 1px solid #8dc63f;
@@ -50,10 +57,21 @@ body > div + div {
     font-weight: 300;
   }
 
-
   .fa:before, .fas:before {
     display: inline-block;
     margin-top: 6px;
+  }
+
+  #sensors {
+    
+    display: flex;
+    justify-content: center;
+  }
+
+  #editcontainer {
+    width: 40px;
+    margin-top: 10px;
+    padding: 5px;
   }
 
   #editLabel {
@@ -63,10 +81,15 @@ body > div + div {
     line-height: 0.75em;
   }
 
-  p {
-    font-size: 12px;
-    font-weight: 400;
-    padding: 8px;
+  #edittext {
+    
+    margin-top: 0;
+    width: 40px;
+    text-align: center;
+  }
+
+  table {
+    margin-left: 15px;
   }
 
 
@@ -77,4 +100,8 @@ body > div + div {
   
   .hide {
     display: none;
+  }
+
+  .show {
+    display: block;
   }

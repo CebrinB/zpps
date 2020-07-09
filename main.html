@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--favicon courtesy of Font Awesome, used with permission license: https://fontawesome.com/license-->
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="stylesheet" type="text/css" href="styles.css">
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/b631726285.js" crossorigin="anonymous"></script>
   <title>{{ title }}</title>
@@ -22,66 +24,61 @@
     <div id="buttonContainer">
       <a id="sensorCheck" href="/sensor">
         <span class="fas fa-tint">
-          <p>Check Soil Moisture Levels</p>
+          <p class="bigbuttons">Check Soil Moisture Levels</p>
         </span>
       </a>
       <a id="hoseOn" href="/water">
         <span class="fas fa-faucet">
-          <p>Turn On Irrigation</p>
+          <p class="bigbuttons">Turn On Irrigation</p>
         </span>
       </a>
       <a id="hoseOff" href="/stop">
         <span class="fas fa-faucet">
-          <p>Turn Off Irrigation</p>
+          <p class="bigbuttons">Turn Off Irrigation</p>
         </span>
       </a>
       <a id="hoseTimer" href="/autowater">
         <span class="fa fa-pagelines">
-          <p>Water for 15 Minutes</p>
+          <p class="bigbuttons">Water for 15 Minutes</p>
         </span>
       </a>
     </div><br>
   </div>
+  <div>
+    <p>Soil Moisture Levels as of: {{ measured }}</p>
+  </div>
   <div id="sensors">
-  <p>Soil Moisture Levels as of: {{ measured }}</p>
+    <div id="editcontainer">
+      <a id="edit">
+        <span class="fas fa-pencil-alt" id="editLabel"></span>
+        <p id="edittext">edit labels</p>
+      </a>
+      <a href="/editlabel" style="display:none">
+        <span class="fas fa-pencil-alt" id="editLabel"></span><br>
+        <span id="edittext">save labels</span>
+      </a>
+    </div>  
     <table>
-        <tr>
-          <td>
-            <a href="">
-              <span class="fas fa-pencil-alt" id="editLabel"></span>
-            </a>
-          </td>
-          <td>{{ name1 }}:</td>
-          <td id="sensor1">{{ sensor1 }}</td>
-        </tr>
-        <tr>
-          <td>
-            <a href="">
-              <span class="fas fa-pencil-alt" id="editLabel"></span>
-            </a>
-          </td>
-          <td>{{ name2 }}:</td>
-          <td id ="sensor2">{{ sensor2 }}</td>
-        </tr>
-        <tr>
-          <td>
-            <a href="">
-              <span class="fas fa-pencil-alt" id="editLabel"></span>
-            </a>
-          </td>
-          <td>{{ name3 }}:</td>
-          <td style="display: none"><input type="text"></td>
-          <td id="sensor3">{{ sensor3 }}</td>
-        </tr>
-        <tr>
-          <td>
-            <a href="">
-              <span class="fas fa-pencil-alt" id="editLabel"></span>
-            </a>
-          </td>
-          <td>{{ name4 }}:</td>
-          <td id="sensor4">{{ sensor4 }}</td>
-        </tr>
+      <tr>            
+        <td class="label">{{ name1 }}:</td>
+        <td style="display: none"><input type="text"></td>
+        <td id="sensor1">{{ sensor1 }}</td>
+      </tr>
+      <tr>
+        <td class="label">{{ name2 }}:</td>
+        <td style="display: none"><input type="text"></td>
+        <td id ="sensor2">{{ sensor2 }}</td>
+      </tr>
+      <tr>
+        <td class="label">{{ name3 }}:</td>
+        <td style="display: none"><input type="text"></td>
+        <td id="sensor3">{{ sensor3 }}</td>
+      </tr>
+      <tr>
+        <td class="label">{{ name4 }}:</td>
+        <td style="display: none"><input type="text"></td>
+        <td id="sensor4">{{ sensor4 }}</td>
+      </tr>
     </table>
   </div>
   <div id="hose">
@@ -90,5 +87,6 @@
   </div>
   
   <script src="{{ url_for('static', filename='js/main.js') }}" type="module"></script>
+  <script src="main.js" type="module"></script>
 </body>
 </html>
