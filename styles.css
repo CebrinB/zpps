@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Source Sans Pro', sans-serif;
-	font-size: 11pt;
+    font-size: 11pt;
   font-weight: 300;
   color: #6c6c6c;
   width: 100%;
@@ -15,10 +15,9 @@ body > div + div {
   margin: 8px;
 }
 
-#header
-	{
-		position: relative;
-		background: #2a2f27 url("apple-tree-3664311_1920.jpg") no-repeat;
+#header {
+    position: relative;
+    background: #2a2f27 url('../banner.jpg') no-repeat;
     background-size: cover;
     text-align: center;
     color: white;
@@ -51,11 +50,17 @@ body > div + div {
     font-weight: 300;
   }
 
-  
 
   .fa:before, .fas:before {
     display: inline-block;
     margin-top: 6px;
+  }
+
+  #editLabel {
+    height: 20px;
+    width: 20px;
+    font-size: 12px;
+    line-height: 0.75em;
   }
 
   p {
@@ -64,7 +69,12 @@ body > div + div {
     padding: 8px;
   }
 
+
   a {
     text-decoration: none;
     color: #86bd3b;
+  }
+  
+  .hide {
+    display: none;
   }

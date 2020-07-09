@@ -24,17 +24,44 @@ def get_last_watered():
     except:
         return "NEVER!"
 
+def get_sensor_labels():
+    try:
+        f = open("sensor_labels.txt", "r",)
+        labels = f.read().splitlines()
+        return labels
+    except:
+        return ["Sensor 1", "Sensor 2", "Sensor 3", "Sensor 4"]
+    
+def get_valve(pin):
+    if (get_status(pin)):
+        return "Closed"
+    else:
+        return "Open"
+
+
 def get_status(pin):
+    return GPIO.input(pin)
+
+
+def init_input(pin):
+    GPIO.setup(pin, GPIO.IN)
+    
+    
+def init_output(pin):
+    GPIO.setup(pin, GPIO.OUT)
+    
+    
+def toggle_sensor_power(pin):
+    GPIO.setup(pin, GPIO.OUT)
+    GPIO.output(pin, not GPIO.input(pin))
+    
+def check_soil(pin):
     f = open("last_measured.txt", "w")
     f.write("{} {}".format(datetime.datetime.today().strftime('%A'), format(datetime.datetime.now())))
     f.close()
     GPIO.setup(pin, GPIO.IN)
     return GPIO.input(pin)
 
-def init_output(pin):
-    GPIO.setup(pin, GPIO.OUT)
-    GPIO.output(pin, GPIO.LOW)
-    GPIO.output(pin, GPIO.HIGH)
     
 def auto_water(delay = 5, pump_pin = 13, water_sensor_pin = 11):
     consecutive_water_count = 0
@@ -53,16 +80,20 @@ def auto_water(delay = 5, pump_pin = 13, water_sensor_pin = 11):
     except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
         GPIO.cleanup() # cleanup all GPI
         
-def pump_on(pump_pin = 13):
+def pump_on(pump_pin = 16):
     init_output(pump_pin)
     f = open("last_watered.txt", "w")
     f.write("Began watering: {} {}".format(datetime.datetime.today().strftime('%A'), format(datetime.datetime.now())))
     f.close()
     GPIO.output(pump_pin, GPIO.LOW)
     
-def pump_off(pump_pin = 13):
+def pump_off(pump_pin = 16):
     init_output(pump_pin)
     f = open("last_watered.txt", "w")
     f.write("Last watered: {} {}".format(datetime.datetime.today().strftime('%A'), format(datetime.datetime.now())))
     f.close()
     GPIO.output(pump_pin, GPIO.HIGH)
+    
+
+def cleanup():
+    GPIO.cleanup()
