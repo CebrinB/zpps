@@ -1,7 +1,9 @@
 from flask import Flask, render_template, redirect, url_for
-import psutil
+import urllib2
+import re
 import datetime
 import water
+import psutil
 import os
 from time import sleep
 
@@ -49,7 +51,7 @@ def hello():
 @app.route("/sensor")
 def check_soil():
     water.toggle_sensor_power(output_pins[1])
-    i = 0;
+    i = 0
     for x in input_pins:
         if (water.check_soil(x)):
             list[i] = "Water me please!"
@@ -75,8 +77,14 @@ def water_off():
     templateData = template()
     return render_template('main.html', **templateData)
 
-@app.route("/editLabel")
+@app.route("/editlabel")
 def edit_label():
+    website = urllib2.urlopen('http://192.168.1.25/')
+    html = website.read()
+    labels = re.findall('class="label"', html)
+    print(x for x in (labels))
+    templateData = template()
+    return render_template('main.html', **templateData)
     
 
 @app.route("/autowater")
@@ -87,7 +95,7 @@ def water_timed():
         sleep(5)
     except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
         water.pump_off()
-        GPIO.cleanup() # cleanup all GPI
+        water.cleanup() # cleanup all GPIO
     water.pump_off()
     templateData = template()
     return render_template('main.html', **templateData)
