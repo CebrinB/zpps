@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 import urllib2
 import re
 import datetime
@@ -23,15 +23,10 @@ def setup_gpio():
 def template(title = "Welcome to ZPPS"):
     recentSensor = water.get_last_measured()
     h2o = water.get_last_watered()
-    labels = water.get_sensor_labels()
     valve = water.get_valve(output_pins[0])
     templateData = {
         'title' : title,
-        'measured' : recentSensor,
-        'name1' : labels[0],
-        'name2' : labels[1],
-        'name3' : labels[2],
-        'name4' : labels[3],        
+        'measured' : recentSensor,        
         'sensor1' : list[0],
         'sensor2' : list[1],
         'sensor3' : list[2],
@@ -79,10 +74,8 @@ def water_off():
 
 @app.route("/editlabel")
 def edit_label():
-    website = urllib2.urlopen('http://192.168.1.25/')
-    html = website.read()
-    labels = re.findall('class="label"', html)
-    print(x for x in (labels))
+    
+    
     templateData = template()
     return render_template('main.html', **templateData)
     

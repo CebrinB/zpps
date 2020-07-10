@@ -8,17 +8,29 @@ window.addEventListener("load", () => {
         document.querySelector('#hoseOn').style.display = 'block';
     }
 
-    const pencils = Array.from(document.querySelectorAll('#edit'));
-    pencils.forEach(pencil => {
-      pencil.addEventListener('touchend', e => {
+    if (localStorage.hasOwnProperty('labels')) {
+        let labels = JSON.parse(localStorage.getItem('labels'));
+    } else {
+        let labels = {"Sensor 1", "Sensor 2", "Sensor 3", "Sensor 4"};
+    }
+    let i = 0;
+    let elems = Array.from(document.querySelectorAll('.label'));
+    elems.forEach(elem => {
+        elem.innerText = labels[i];
+    });
+    
+    let pencil = document.querySelector('#edit');
+    pencil.addEventListener('touchend', e => {
         editLabel(e.currentTarget);
-        
-      });
+    });
+    
+    pencil = document.querySelector('#save');
+    pencil.addEventListener('touchend', e => {
+        saveLabel();
     });
 });
 
 function editLabel(a) {
-  debugger;
     a.style.display = 'none';                     //hide the edit button
     a.nextElementSibling.style.display = 'block'; //show the save button
 
@@ -34,5 +46,20 @@ function editLabel(a) {
       input.parentElement.style.display = 'block';
       input.value = input.parentElement.previousElementSibling.innerText; 
     });   
+}
+
+function saveLabel() {
+    const inputs = Array.from(document.querySelectorAll('input'));
+    const labels = Array.from(document.querySelectorAll('.label'));
+    let temp = []
+    let i = 0;
+    labels.forEach(label => {
+        label.innerText = inputs[i].value;
+        temp.push(inputs[i].value);
+        i++;
+    });
+    
+    localStorage.setItem('labels', JSON.stringify(temp));
+    window.location.href = "/";
 }
     

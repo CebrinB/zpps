@@ -16,6 +16,7 @@ def get_last_measured():
     except:
         return "NEVER!"
     
+    
 def get_last_watered():
     try:
         f = open("last_watered.txt", "r")
@@ -24,13 +25,6 @@ def get_last_watered():
     except:
         return "NEVER!"
 
-def get_sensor_labels():
-    try:
-        f = open("sensor_labels.txt", "r",)
-        labels = f.read().splitlines()
-        return labels
-    except:
-        return ["Sensor 1", "Sensor 2", "Sensor 3", "Sensor 4"]
     
 def get_valve(pin):
     if (get_status(pin)):
