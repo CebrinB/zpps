@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--favicon courtesy of Font Awesome, used with permission license: https://fontawesome.com/license-->
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
-  <link rel="stylesheet" type="text/css" href="styles.css">
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/b631726285.js" crossorigin="anonymous"></script>
   <title>{{ title }}</title>
@@ -60,33 +58,32 @@
     </div>  
     <table>
       <tr>            
-        <td class="label">Sensor 1:</td>
+        <td><span class="label">Sensor 1</span> :</td>
         <td style="display: none"><input type="text"></td>
         <td id="sensor1">{{ sensor1 }}</td>
       </tr>
       <tr>
-        <td class="label">Sensor 2:</td>
+        <td><span class="label">Sensor 2</span> :</td>
         <td style="display: none"><input type="text"></td>
         <td id ="sensor2">{{ sensor2 }}</td>
       </tr>
       <tr>
-        <td class="label">Sensor 3:</td>
+        <td><span class="label">Sensor 3</span> :</td>
         <td style="display: none"><input type="text"></td>
         <td id="sensor3">{{ sensor3 }}</td>
       </tr>
       <tr>
-        <td class="label">Sensor 4:</td>
+        <td><span class="label">Sensor 4</span> :</td>
         <td style="display: none"><input type="text"></td>
         <td id="sensor4">{{ sensor4 }}</td>
       </tr>
     </table>
   </div>
   <div id="hose">
-    <span>Valve Status: <span id="hoseStatus"> {{ valve }} </span></span><br>
+    <span>Valve Status: <span id="hoseStatus">{{ valve }}</span></span><br>
     <span id="hoseRecent">{{ watered }}</span>
   </div>
   
   <script src="{{ url_for('static', filename='js/main.js') }}" type="module"></script>
-  <script src="main.js" type="module"></script>
 </body>
 </html>

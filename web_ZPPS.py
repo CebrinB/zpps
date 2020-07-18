@@ -45,30 +45,30 @@ def hello():
 
 @app.route("/sensor")
 def check_soil():
-    water.toggle_sensor_power(output_pins[1])
+    water.sensor_power_on(output_pins[1])
     i = 0
     for x in input_pins:
         if (water.check_soil(x)):
-            list[i] = "Water me please!"
-            i+=1
-        else:
             list[i] = "I'm a happy plant"
             i+=1
-    water.toggle_sensor_power(output_pins[1])
+        else:
+            list[i] = "Water me please!"
+            i+=1
+    water.sensor_power_off(output_pins[1])
     templateData = template()
     return render_template('main.html', **templateData)
 
 
 @app.route("/water")
 def water_on():
-    water.pump_on()
+    water.pump_on(output_pins[0])
     templateData = template()
     return render_template('main.html', **templateData)
 
 
 @app.route("/stop")
 def water_off():
-    water.pump_off()
+    water.pump_off(output_pins[0])
     templateData = template()
     return render_template('main.html', **templateData)
 
@@ -84,12 +84,12 @@ def edit_label():
 def water_timed():
     print ("Here we go! Press CTRL+C to exit")
     try:
-        water.pump_on()
+        water.pump_on(output_pins[0])
         sleep(5)
     except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
-        water.pump_off()
+        water.pump_off(output_pins[0])
         water.cleanup() # cleanup all GPIO
-    water.pump_off()
+    water.pump_off(output_pins[0])
     templateData = template()
     return render_template('main.html', **templateData)
 

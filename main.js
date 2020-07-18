@@ -1,35 +1,3 @@
-window.addEventListener("load", () => {
-    let text = document.querySelector('#hoseStatus').innerText;
-    if (text === "Open") {
-        document.querySelector('#hoseOn').style.display = 'none';
-        document.querySelector('#hoseOff').style.display = 'block';
-    } else {
-        document.querySelector('#hoseOff').style.display = 'none';
-        document.querySelector('#hoseOn').style.display = 'block';
-    }
-
-    if (localStorage.hasOwnProperty('labels')) {
-        let labels = JSON.parse(localStorage.getItem('labels'));
-    } else {
-        let labels = {"Sensor 1", "Sensor 2", "Sensor 3", "Sensor 4"};
-    }
-    let i = 0;
-    let elems = Array.from(document.querySelectorAll('.label'));
-    elems.forEach(elem => {
-        elem.innerText = labels[i];
-    });
-    
-    let pencil = document.querySelector('#edit');
-    pencil.addEventListener('touchend', e => {
-        editLabel(e.currentTarget);
-    });
-    
-    pencil = document.querySelector('#save');
-    pencil.addEventListener('touchend', e => {
-        saveLabel();
-    });
-});
-
 function editLabel(a) {
     a.style.display = 'none';                     //hide the edit button
     a.nextElementSibling.style.display = 'block'; //show the save button
@@ -44,7 +12,7 @@ function editLabel(a) {
     const inputs = Array.from(document.querySelectorAll('input'));
     inputs.forEach(input => {
       input.parentElement.style.display = 'block';
-      input.value = input.parentElement.previousElementSibling.innerText; 
+      input.value = input.parentElement.previousElementSibling.firstChild.innerText; 
     });   
 }
 
@@ -62,4 +30,40 @@ function saveLabel() {
     localStorage.setItem('labels', JSON.stringify(temp));
     window.location.href = "/";
 }
+
+
+window.addEventListener("load", () => {
+    let text = document.querySelector('#hoseStatus').innerText;
+    if (text === "Open") {
+        document.querySelector('#hoseOn').style.display = 'none';
+        document.querySelector('#hoseOff').style.display = 'block';
+    } else {
+        document.querySelector('#hoseOff').style.display = 'none';
+        document.querySelector('#hoseOn').style.display = 'block';
+    }
+
+    let labels = [];
+    if (localStorage.hasOwnProperty('labels')) {
+        labels = JSON.parse(localStorage.getItem('labels'));
+    } else {
+        labels = ["Sensor 1", "Sensor 2", "Sensor 3", "Sensor 4"];
+    }
+    
+    let i = 0;
+    let elems = Array.from(document.querySelectorAll('.label'));
+    elems.forEach(elem => {
+        elem.innerText = labels[i];
+        i++;
+    });
+    
+    let pencil = document.querySelector('#edit');
+    pencil.addEventListener('touchend', e => {
+        editLabel(e.currentTarget);
+    });
+    
+    pencil = document.querySelector('#save');
+    pencil.addEventListener('touchend', e => {
+        saveLabel();
+    });
+});
     

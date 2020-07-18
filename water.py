@@ -31,6 +31,7 @@ def get_valve(pin):
         return "Closed"
     else:
         return "Open"
+    get_status(pin)
 
 
 def get_status(pin):
@@ -45,9 +46,14 @@ def init_output(pin):
     GPIO.setup(pin, GPIO.OUT)
     
     
-def toggle_sensor_power(pin):
+def sensor_power_on(pin):
     GPIO.setup(pin, GPIO.OUT)
-    GPIO.output(pin, not GPIO.input(pin))
+    GPIO.output(pin, GPIO.LOW)
+    
+def sensor_power_off(pin):
+    GPIO.setup(pin, GPIO.OUT)
+    GPIO.output(pin, GPIO.HIGH)
+    
     
 def check_soil(pin):
     f = open("last_measured.txt", "w")
@@ -74,14 +80,15 @@ def auto_water(delay = 5, pump_pin = 13, water_sensor_pin = 11):
     except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
         GPIO.cleanup() # cleanup all GPI
         
-def pump_on(pump_pin = 16):
+def pump_on(pump_pin):
     init_output(pump_pin)
     f = open("last_watered.txt", "w")
     f.write("Began watering: {} {}".format(datetime.datetime.today().strftime('%A'), format(datetime.datetime.now())))
     f.close()
     GPIO.output(pump_pin, GPIO.LOW)
     
-def pump_off(pump_pin = 16):
+    
+def pump_off(pump_pin):
     init_output(pump_pin)
     f = open("last_watered.txt", "w")
     f.write("Last watered: {} {}".format(datetime.datetime.today().strftime('%A'), format(datetime.datetime.now())))
